@@ -3,22 +3,21 @@ require('dotenv').config()
 const Express = require('express')
 const Mongoose = require('mongoose')
 const bodyParser = require('body-parser')
-const TodoL = require('./models/todoL')
 
-const server = new Express()
+const app = new Express()
 
-server.use(bodyParser.urlencoded({ extended: false }));
-server.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 Mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopology: true })
 
-server.listen(process.env.PORT || 3001, () =>{
-    console.log('Server is running')
+app.listen(process.env.PORT || 3001, () =>{
+    console.log('App is running')
 })
 
-server.use('/', Express.static('./src'))
+app.use('/', Express.static('./src'))
 
-server.get('/model/todoL', (req, res) => {
+app.get('/model', (req, res) => {
     TodoL.find({}, (err, items) =>{
 
         if(err){console.log(handleError(err))}
@@ -26,7 +25,7 @@ server.get('/model/todoL', (req, res) => {
     })
 })
 
-server.post('/model/todoL', (req, res) => {
+app.post('/model', (req, res) => {
     console.log(req.query)
     
     let qData = []
@@ -38,8 +37,6 @@ server.post('/model/todoL', (req, res) => {
             qData.push(data)
         }
     })
-
-    console.log(`Find Test: ${qData}`)
 
     let catSize = qData.filter(item =>{
         return item.category === req.query.category
@@ -57,7 +54,7 @@ server.post('/model/todoL', (req, res) => {
     res.sendStatus(200)
 })
 
-server.put('/model/todoL/:id', (req, res) =>{
+app.put('/model/:id', (req, res) =>{
     TodoL.findById(req.params.id, (err, items) =>{
         if(err){console.log(handleError(err))}
         items.update(req.query, (err) =>{
@@ -70,7 +67,7 @@ server.put('/model/todoL/:id', (req, res) =>{
     })
 })
 
-server.delete('/model/todoL/:id', (req, res) =>{
+app.delete('/model/:id', (req, res) =>{
     console.log(`This is the delete route: ${req.params.id}`)
     TodoL.remove({id: req.params.id}, (err) => {
         if(err){console.log(handleError(err))}
