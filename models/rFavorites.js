@@ -9,4 +9,4 @@ const restaurantsFavorites = new Schema({
     genreID: Number
 })
 
-module.exports = Mongoose.model('todoItems', todoItemsSchema)
+module.exports = Mongoose.model('rFavorites', rFavoritesSchema)
