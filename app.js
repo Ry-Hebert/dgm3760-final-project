@@ -16,7 +16,7 @@ app.listen(process.env.PORT || 3001, () =>{
     console.log('App is running')
 })
 
-app.use('/', Express.static('./src'))
+app.use('/', Express.static('./public'))
 
 app.get('/model', (req, res) => {
     rFavorites.find({}, (err, items) =>{
