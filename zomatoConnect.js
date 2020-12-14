@@ -42,6 +42,46 @@ const apiQuery = {
         let searchCity = await fetch(methodURL,{
             method: 'GET',
             headers: { 'user-key': Z_CONNECT}
-        })
-    }
+        }).then()
+    },
+
+    cuisinesSearch: async (cityID) =>{
+        let methodURL = this.url + `/cuisines?city_id=${cityID}`
+        let searchCity = await fetch(methodURL,{
+            method: 'GET',
+            headers: { 'user-key': Z_CONNECT}
+        }).then()
+    },
+
+    categoriesSearch: async () =>{
+        let methodURL = this.url + `/categories`
+        let searchCity = await fetch(methodURL,{
+            method: 'GET',
+            headers: { 'user-key': Z_CONNECT}
+        }).then()
+    },
+
+    establishmentsSearch: async (cityID) =>{
+        let methodURL = this.url + `/establishments?city_id=${cityID}`
+        let searchCity = await fetch(methodURL,{
+            method: 'GET',
+            headers: { 'user-key': Z_CONNECT}
+        }).then()
+    },
+
+    locationsSearch: async (locationVar) =>{
+        let methodURL = this.url + `/locations?query=${locationVar}`
+        let searchCity = await fetch(methodURL,{
+            method: 'GET',
+            headers: { 'user-key': Z_CONNECT}
+        }).then()
+    },
+
+    location_detailsSearch: async (entityID) =>{
+        let methodURL = this.url + `/location_details?entity_id=${entityID}`
+        let searchCity = await fetch(methodURL,{
+            method: 'GET',
+            headers: { 'user-key': Z_CONNECT}
+        }).then()
+    },
 }
