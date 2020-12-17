@@ -1,4 +1,3 @@
-require('dotenv').config()
 // zomato
 
 // Reference: https://developers.zomato.com/documentation#!/location/locations
@@ -36,45 +35,76 @@ require('dotenv').config()
 
 const apiQuery = {
     url: 'https://developers.zomato.com/api/v2.1',
+    melon: '9cc015f30c4f6ca876b0a41a3d999e28',
     
     citySearch: async (locationVar) =>{
-        let methodURL = this.url + `/cities?q=${locationVar}`
+        let methodURL = apiQuery.url + `/cities?q=${locationVar}`
         let searchCity = await fetch(methodURL,{
             method: 'GET',
-            headers: { 'user-key': Z_CONNECT}
-        }).then()
+            headers: { 'user-key': apiQuery.melon}
+        })
+        console.log('This is the searchCity Results: ')
+        console.log(searchCity)
+        let searchCityRes = searchCity.json()
+        console.log('This is the searchCityRes (Post .json()): ')
+        console.log(searchCityRes)
+        return searchCityRes
     },
 
     cuisinesSearch: async (cityID) =>{
         let methodURL = this.url + `/cuisines?city_id=${cityID}`
         let searchCity = await fetch(methodURL,{
             method: 'GET',
-            headers: { 'user-key': Z_CONNECT}
-        }).then()
+            headers: { 'user-key': apiQuery.melon}
+        })
+        console.log('This is the searchCity Results: ')
+        console.log(searchCity)
+        let searchCityRes = searchCity.json()
+        console.log('This is the searchCityRes (Post .json()): ')
+        console.log(searchCityRes)
+        return searchCityRes
     },
 
     categoriesSearch: async () =>{
         let methodURL = this.url + `/categories`
         let searchCity = await fetch(methodURL,{
             method: 'GET',
-            headers: { 'user-key': Z_CONNECT}
-        }).then()
+            headers: { 'user-key': apiQuery.melon}
+        })
+        console.log('This is the searchCity Results: ')
+        console.log(searchCity)
+        let searchCityRes = searchCity.json()
+        console.log('This is the searchCityRes (Post .json()): ')
+        console.log(searchCityRes)
+        return searchCityRes
     },
 
     establishmentsSearch: async (cityID) =>{
         let methodURL = this.url + `/establishments?city_id=${cityID}`
         let searchCity = await fetch(methodURL,{
             method: 'GET',
-            headers: { 'user-key': Z_CONNECT}
-        }).then()
+            headers: { 'user-key': apiQuery.melon}
+        })
+        console.log('This is the searchCity Results: ')
+        console.log(searchCity)
+        let searchCityRes = searchCity.json()
+        console.log('This is the searchCityRes (Post .json()): ')
+        console.log(searchCityRes)
+        return searchCityRes
     },
 
     locationsSearch: async (locationVar) =>{
-        let methodURL = this.url + `/locations?query=${locationVar}`
+        let methodURL = apiQuery.url + `/locationsSearch?inQ=${locationVar}`
         let searchCity = await fetch(methodURL,{
             method: 'GET',
-            headers: { 'user-key': Z_CONNECT}
-        }).then()
+            headers: { 'user-key': apiQuery.melon}
+        })
+        console.log('This is the searchCity Results: ')
+        console.log(searchCity)
+        let searchCityRes = searchCity.json()
+        console.log('This is the searchCityRes (Post .json()): ')
+        console.log(searchCityRes)
+        return searchCityRes
     },
 
     location_detailsSearch: async (entityID) =>{
@@ -82,7 +112,13 @@ const apiQuery = {
         let searchCity = await fetch(methodURL,{
             method: 'GET',
             headers: { 'user-key': Z_CONNECT}
-        }).then()
+        })
+        console.log('This is the searchCity Results: ')
+        console.log(searchCity)
+        let searchCityRes = searchCity.json()
+        console.log('This is the searchCityRes (Post .json()): ')
+        console.log(searchCityRes)
+        return searchCityRes
     },
 
     testImport: () =>{
@@ -90,4 +126,4 @@ const apiQuery = {
     },
 }
 
-export {ApiQuery}
+export default apiQuery

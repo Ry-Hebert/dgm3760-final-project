@@ -1,5 +1,4 @@
-// const ApiQuery = require("./zomatoConnect")
-import ApiQuery from './zomatoConnect'
+import ApiQuery from './zomatoConnect.js'
 console.log('Long Shot')
 
 const getDB = async () =>{
@@ -34,9 +33,14 @@ let citySearchIn = document.querySelector('#in1')
 let citySearchSub = document.querySelector('#in2')
 
 citySearchSub.addEventListener('click', () => {
-let searchData1 = citySearchIn.value
-console.log(searchData1)
-ApiQuery.testImport()
+    let searchData1 = citySearchIn.value
+    console.log(`User Input data ${searchData1}`)
+    ApiQuery.testImport()
+
+    let locactionSRes = ApiQuery.locationsSearch(searchData1)
+    // let locactionSRes = ApiQuery.citySearch(searchData1)
+    console.log(`Location Search Results: ${locactionSRes}`)
+    console.log(locactionSRes)
 
 })
 
