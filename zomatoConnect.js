@@ -84,4 +84,10 @@ const apiQuery = {
             headers: { 'user-key': Z_CONNECT}
         }).then()
     },
+
+    testImport: () =>{
+        console.log('Zomato Connect .JS has been imported / is working')
+    },
 }
+
+export {ApiQuery}

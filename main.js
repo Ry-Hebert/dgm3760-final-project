@@ -1,3 +1,7 @@
+// const ApiQuery = require("./zomatoConnect")
+import ApiQuery from './zomatoConnect'
+console.log('Long Shot')
+
 const getDB = async () =>{
     const favoritesDBRes = await fetch('models/rFavorites')
     const favoritesList = await favoritesDBRes.json()
@@ -17,7 +21,7 @@ let putToDB = async (value) =>{
         method: 'PUT'
     })
 }
-
+ 
 let deleteFromDB = async (value) =>{
     console.log(`Deleting: ${value} from the database`)
         let removeFromDatabase = await fetch(`model/rFavorites/${value}`, {
@@ -25,3 +29,20 @@ let deleteFromDB = async (value) =>{
     })
     return removeFromDatabase
 }
+
+let citySearchIn = document.querySelector('#in1')
+let citySearchSub = document.querySelector('#in2')
+
+citySearchSub.addEventListener('click', () => {
+let searchData1 = citySearchIn.value
+console.log(searchData1)
+ApiQuery.testImport()
+
+})
+
+// Convenience feature, submits search when enter is pressed from target search input field
+citySearchIn.addEventListener('keyup', (event) =>{
+    if(event.keyCode == 13){citySearchSub.click()}
+})
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+

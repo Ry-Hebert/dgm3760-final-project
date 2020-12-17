@@ -4,6 +4,7 @@ const Express = require('express')
 const Mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const rFavorites = require('./models/rFavorites')
+// const webpack = require('webpack')
 
 const app = new Express()
 
@@ -16,7 +17,7 @@ app.listen(process.env.PORT || 3001, () =>{
     console.log('App is running')
 })
 
-app.use('/', Express.static('./public'))
+app.use('/', Express.static('./'))
 
 app.get('/model', (req, res) => {
     rFavorites.find({}, (err, items) =>{
