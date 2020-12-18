@@ -89,4 +89,18 @@ main{
     &:active{
         background-color: #aaa;
     }
+    .bottom_bar{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-content: space-between;
+        & > *{
+            grid-column: auto;
+        }
+        i{
+            justify-self: end;
+        }
+        .hide{
+            display: none;
+        }
+    }
 }

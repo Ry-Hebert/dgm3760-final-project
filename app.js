@@ -41,15 +41,15 @@ app.post('/model', (req, res) => {
     })
 
     let catSize = qData.filter(item =>{
-        return item.category === req.query.category
+        return item.category === req.query.cuisine
     })
     
     let catLength = catSize.length
 
     rFavorites.create({
-    todo: req.query.todo,
-    complete: req.query.complete,
-    category: req.query.category,
+    id: req.query.id,
+    name: req.query.name,
+    cuisine: req.query.cuisine,
     categoryID: catLength + 1
     })
 

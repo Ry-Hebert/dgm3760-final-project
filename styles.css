@@ -125,7 +125,7 @@ main {
   grid-column: 1 / span 1; }
 
 .displayCard {
-  width: 90%;
+  width: 95%;
   max-width: 80vw;
   display: grid;
   border-radius: .5rem;
@@ -138,6 +138,16 @@ main {
     background-color: #ccc; }
   .displayCard:active {
     background-color: #aaa; }
+  .displayCard .bottom_bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between; }
+    .displayCard .bottom_bar > * {
+      grid-column: auto; }
+    .displayCard .bottom_bar i {
+      justify-self: end; }
+    .displayCard .bottom_bar .hide {
+      display: none; }
 
 @media only screen and (min-width: 34rem) {
   .input-field {
