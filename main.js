@@ -10,7 +10,7 @@ const getDB = async () =>{
 }
 
 let postToDB = async (value) =>{
-        let pushToDatabase = await fetch(`model/rFavorites?name=${value.name}&genre=${value.genre}&category=${value.category}&genreID=${value.genreID}&id=${value.id}`, {
+        let pushToDatabase = await fetch(`/model?id=${value.id}&name=${value.name}&cuisine=${value.cuisine}`, {
         method: 'POST'
     })
 }
@@ -87,6 +87,27 @@ let lo_detailsSearch = async (ent_id, entity_type) =>{
 
     outDest.innerHTML = topRestaurants
     outDest.innerHTML += topCuisinesRes
+
+    document.querySelectorAll('.material-icons').forEach( element =>{
+        element.addEventListener( 'click', ()=>{
+            let likeIcon = element.getAttribute('value')
+            let selectorValue = document.querySelectorAll(`.togSelector${likeIcon}`).forEach( y =>{y.classList.toggle('hide')})
+
+            let passToDatabase1 = document.querySelector('.show').getAttribute('value2')
+            let passToDatabase2 = document.querySelector('.show').getAttribute('value3')
+            let passToDatabase3 = document.querySelector('.show').getAttribute('value4')
+            console.log('Pass to database test')
+            console.log(passToDatabase1)
+            console.log(passToDatabase2)
+            console.log(passToDatabase3)
+
+            if(element.querySelector('show') == true){
+                let entryValue = {id: passToDatabase1, name: passToDatabase2, cuisine: passToDatabase3}
+
+                postToDB(entryValue)
+            }
+        })
+    })
 }
 
 let restaurantCuisines = (top5) =>{
@@ -106,7 +127,7 @@ let restaurantRender = (rArray) =>{
     rArray.map((element, i) =>{
         console.log(element.restaurant)
         htmlReturn += `
-            <div class='waves-effect displayCard dcAction' value='${i}' id='dca${i}'>
+            <div class='waves-effect displayCard dcAction' value='${i}' valuResid='${element.restaurant.id}' id='dca${i}'>
                 <h5>${element.restaurant.name}.</h5>
                 <p>Cuisine: ${element.restaurant.cuisines}</p>
                 <br>
@@ -122,6 +143,12 @@ let restaurantRender = (rArray) =>{
                 <br>
                 <p>Address: </p>
                 <p>${element.restaurant.location.address}</p>
+                <br>
+                <div class='bottom_bar'>
+                    <a href='${element.restaurant.url}'><p>Learn More</p></a>
+                    <i class='small material-icons togSelector${i} show' value='${i}' value2='${element.restaurant.id}' value3='${element.restaurant.name}' value4='${element.restaurant.cuisines}'>favorite_border</i>
+                    <i class='small material-icons togSelector${i} hide' value='${i}' value2='${element.restaurant.id}' value3='${element.restaurant.name}' value4='${element.restaurant.cuisines}'>favorite</i>
+                </div>
             </div>`
     })
 
