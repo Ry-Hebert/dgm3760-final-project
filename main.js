@@ -10,7 +10,7 @@ const getDB = async () =>{
 }
 
 let postToDB = async (value) =>{
-        let pushToDatabase = await fetch(`/model?id=${value.id}&name=${value.name}&cuisine=${value.cuisine}`, {
+        let pushToDatabase = await fetch(`model?id=${value.id}&name=${value.name}&cuisine=${value.cuisine}`, {
         method: 'POST'
     })
 }
@@ -23,7 +23,7 @@ let putToDB = async (value) =>{
  
 let deleteFromDB = async (value) =>{
     console.log(`Deleting: ${value} from the database`)
-        let removeFromDatabase = await fetch(`model/rFavorites/${value}`, {
+        let removeFromDatabase = await fetch(`model/${value}`, {
         method: 'DELETE'
     })
     return removeFromDatabase
@@ -92,22 +92,33 @@ let lo_detailsSearch = async (ent_id, entity_type) =>{
         element.addEventListener( 'click', ()=>{
             let likeIcon = element.getAttribute('value')
             let selectorValue = document.querySelectorAll(`.togSelector${likeIcon}`).forEach( y =>{y.classList.toggle('hide')})
-
-            let passToDatabase1 = document.querySelector('.show').getAttribute('value2')
-            let passToDatabase2 = document.querySelector('.show').getAttribute('value3')
-            let passToDatabase3 = document.querySelector('.show').getAttribute('value4')
-            console.log('Pass to database test')
-            console.log(passToDatabase1)
-            console.log(passToDatabase2)
-            console.log(passToDatabase3)
-
-            if(element.querySelector('show') == true){
-                let entryValue = {id: passToDatabase1, name: passToDatabase2, cuisine: passToDatabase3}
-
-                postToDB(entryValue)
-            }
         })
     })
+
+    document.querySelectorAll('.show').forEach(element =>{
+        element.addEventListener('click', () =>{
+        let passToDatabase1 = element.getAttribute('value2')
+        let passToDatabase2 = element.getAttribute('value3')
+        let passToDatabase3 = element.getAttribute('value4')
+        console.log('Pass to database test')
+        console.log(passToDatabase1)
+        console.log(passToDatabase2)
+        console.log(passToDatabase3)
+
+        let entryValue = {id: passToDatabase1, name: passToDatabase2, cuisine: passToDatabase3}
+        postToDB(entryValue)
+        })
+    }) 
+
+    document.querySelectorAll('.delete').forEach(element =>{
+        element.addEventListener('click', () =>{
+            let passToDatabase1 = element.getAttribute('value2')
+            console.log('Pass to database test')
+            console.log(passToDatabase1)
+    
+            deleteFromDB(passToDatabase1)
+        })
+    }) 
 }
 
 let restaurantCuisines = (top5) =>{
@@ -147,7 +158,7 @@ let restaurantRender = (rArray) =>{
                 <div class='bottom_bar'>
                     <a href='${element.restaurant.url}'><p>Learn More</p></a>
                     <i class='small material-icons togSelector${i} show' value='${i}' value2='${element.restaurant.id}' value3='${element.restaurant.name}' value4='${element.restaurant.cuisines}'>favorite_border</i>
-                    <i class='small material-icons togSelector${i} hide' value='${i}' value2='${element.restaurant.id}' value3='${element.restaurant.name}' value4='${element.restaurant.cuisines}'>favorite</i>
+                    <i class='small material-icons togSelector${i} delete hide' value='${i}' value2='${element.restaurant.id}' value3='${element.restaurant.name}' value4='${element.restaurant.cuisines}'>favorite</i>
                 </div>
             </div>`
     })
