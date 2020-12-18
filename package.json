@@ -6,14 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./app.js",
-    "sass": "node-sass --include-path scss ./src/styles.scss ./styles.css"
+    "sass": "node-sass --include-path scss ./src/styles.scss ./styles.css",
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.6",
-    "webpack": "^5.10.3"
+    "webpack": "^5.11.0"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
